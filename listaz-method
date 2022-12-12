@@ -1,1 +1,33 @@
+#include "mozimusor.h"
+#include <iostream>
+#include <algorithm>
+#include <numeric>
+#include <vector>
+#include <list>
+#include <map>
+#include <exception>
+#include <string>
+#include <algorithm>
+#include <iostream>
+#include <sstream>
 
+MoziMusor::MoziMusor(size_t size) : vetitesek(size)
+{
+}
+
+void MoziMusor::hozzaad(unsigned int index, Film* film, const Idopont& ido)
+{
+     vetitesek[index].emplace_back(film, ido);
+     if (index < 0 || index > vetitesek.size())
+             throw myException(index);
+}
+
+void MoziMusor::listaz() const
+{
+    list <Vetites> film;
+    for (unsigned int i=0; i<vetitesek.size(); i++)
+    cout << "Terem: " << i << ",vetitesek:" << endl;
+    for (auto it = film.begin(); it != film.end(); it++) {
+    cout << "        " << it->getKezdes().toString() << " : " << it->getFilm()->getNev() << ", hossz: " << it->getFilm()->getHossz() << endl;
+    }
+}
